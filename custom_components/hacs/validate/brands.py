@@ -1,3 +1,5 @@
+import os
+
 from __future__ import annotations
 
 from custom_components.hacs.enums import HacsCategory
@@ -22,7 +24,10 @@ class Validator(ActionValidationBase):
     async def async_validate(self):
         """Validate the repository."""
 
-        response = await self.hacs.session.get(URL)
+        response = await self.hacs.session.get(
+          url=URL,
+          proxy=os.getenv('http_proxy'),
+        )
         content = await response.json()
 
         if self.repository.data.domain not in content["custom"]:

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import os
 from typing import Any
 
 from aiohttp import ClientSession, ClientTimeout
@@ -33,6 +34,7 @@ class HacsDataClient:
                     "User-Agent": self._client_name,
                     "If-None-Match": self._etags.get(endpoint, ""),
                 },
+                proxy=os.getenv('http_proxy'),
             )
             if response.status == 304:
                 raise HacsNotModifiedException() from None

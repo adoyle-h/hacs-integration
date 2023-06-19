@@ -712,6 +712,7 @@ class HacsBase:
                     url=url,
                     timeout=ClientTimeout(total=60),
                     headers=headers,
+                    proxy=os.getenv('http_proxy'),
                 )
 
                 # Make sure that we got a valid result
