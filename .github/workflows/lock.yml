@@ -1,8 +1,7 @@
 name: "Lock closed issues and PR's"
 
 on:
-  schedule:
-    - cron: "0 * * * *"
+  workflow_dispatch:
 
 concurrency:
   group: lock-${{ github.ref }}
